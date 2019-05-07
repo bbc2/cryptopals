@@ -1,4 +1,4 @@
-src=setup.py src test
+src=src test
 
 .PHONY: check
 check:

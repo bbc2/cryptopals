@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "cryptopals"
+version = "0.0.1"
+description = "Attempt to solve the Cryptopals challenges"
+authors = ["Bertrand Bonnefoy-Claudet <bertrand@bertrandbc.com>"]
+license = "MIT"
+packages = [
+    {include = "cryptopals", from = "src"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+black = {version = "*", allows-prereleases = true}
+flake8 = "*"
+isort = "*"
+mypy = "*"
+pytest = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
