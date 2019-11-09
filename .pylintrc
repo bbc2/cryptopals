@@ -1,0 +1,10 @@
+[MESSAGES CONTROL]
+disable=C,R,W
+enable=
+    async,
+    imports,
+    logging,
+    stdlib,
+    string,
+    typecheck,
+    variables

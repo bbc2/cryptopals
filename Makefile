@@ -5,6 +5,7 @@ check:
 	mypy ${src}
 	pytest
 	flake8 ${src}
+	pylint ${src}
 	isort --check --recursive ${src}
 	black --check ${src}
 

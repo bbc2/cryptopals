@@ -16,6 +16,7 @@ black = {version = "*", allows-prereleases = true}
 flake8 = "*"
 isort = "*"
 mypy = "*"
+pylint = "*"
 pytest = "*"
 
 [build-system]
