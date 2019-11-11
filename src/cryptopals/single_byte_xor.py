@@ -1,6 +1,7 @@
 import itertools
 from collections import Counter
-from typing import List
+from dataclasses import dataclass
+from typing import Sequence
 
 import cryptopals.format
 
@@ -54,14 +55,38 @@ def key_from_int(integer: int) -> bytes:
     return integer.to_bytes(length=1, byteorder="big")
 
 
+@dataclass
+class Decryption:
+    plaintext: bytes
+    key: bytes
+
+    @classmethod
+    def from_ciphertext(cls, ciphertext: bytes, key: bytes) -> "Decryption":
+        return cls(plaintext=cryptopals.xor.encrypt(ciphertext, key), key=key,)
+
+
 def crack(ciphertext: bytes) -> bytes:
+    """Return a likely single-byte key assuming XOR on English plaintext."""
     possible_plaintexts = (
-        cryptopals.xor.encrypt(ciphertext, key=key_from_int(integer))
+        Decryption(
+            plaintext=cryptopals.xor.encrypt(ciphertext, key=key_from_int(integer)),
+            key=key_from_int(integer),
+        )
         for integer in range(0, 255)
     )
-    return min(possible_plaintexts, key=distance)
+    best_candidate = min(
+        possible_plaintexts, key=lambda candidate: distance(candidate.plaintext)
+    )
+    return best_candidate.key
 
 
-def find(ciphertexts: List[bytes]) -> bytes:
-    best_plaintexts = (crack(ciphertext) for ciphertext in ciphertexts)
-    return min(best_plaintexts, key=distance)
+def find(ciphertexts: Sequence[bytes]) -> bytes:
+    """Return a likely plaintext from a list of potential ciphertexts."""
+    decryptions = (
+        Decryption.from_ciphertext(ciphertext=ciphertext, key=crack(ciphertext))
+        for ciphertext in ciphertexts
+    )
+    best_candidate = min(
+        decryptions, key=lambda candidate: distance(candidate.plaintext)
+    )
+    return best_candidate.plaintext

@@ -8,4 +8,8 @@ def test():
 
     result = cryptopals.single_byte_xor.crack(input_)
 
-    assert result == b"Cooking MC's like a pound of bacon"
+    assert result == b"X"
+    assert (
+        cryptopals.xor.decrypt(input_, key=result)
+        == b"Cooking MC's like a pound of bacon"
+    )
