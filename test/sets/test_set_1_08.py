@@ -6,7 +6,7 @@ import cryptopals.ecb
 
 
 def test():
-    lines = pkg_resources.resource_stream("test.sets", "data/1/8.txt").readlines()
+    lines = pkg_resources.resource_stream("test.sets", "data/1/08.txt").readlines()
     ciphertexts = [base64.b64decode(line) for line in lines]
 
     detected = [

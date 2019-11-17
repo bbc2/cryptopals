@@ -6,7 +6,7 @@ import cryptopals.aes
 
 
 def test():
-    data = pkg_resources.resource_stream("test.sets", "data/1/7.txt").read()
+    data = pkg_resources.resource_stream("test.sets", "data/1/07.txt").read()
     ciphertext = base64.b64decode(data)
 
     result = cryptopals.aes.decrypt_ecb(key=b"YELLOW SUBMARINE", ciphertext=ciphertext)

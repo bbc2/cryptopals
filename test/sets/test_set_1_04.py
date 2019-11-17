@@ -8,7 +8,7 @@ def test():
     ciphertexts = [
         cryptopals.format.hex_to_bytes(line.strip())
         for line in pkg_resources.resource_stream(
-            "test.sets", "data/1/4.txt"
+            "test.sets", "data/1/04.txt"
         ).readlines()
     ]
 

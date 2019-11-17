@@ -16,7 +16,7 @@ def test_hamming_distance():
 
 def test_crack():
     ciphertext = base64.b64decode(
-        pkg_resources.resource_stream("test.sets", "data/1/6.txt").read()
+        pkg_resources.resource_stream("test.sets", "data/1/06.txt").read()
     )
 
     result = cryptopals.multi_byte_xor.crack(ciphertext, key_lengths=range(2, 40))
