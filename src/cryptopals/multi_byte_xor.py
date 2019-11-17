@@ -1,7 +1,8 @@
 import string
-from typing import Iterable, Iterator, List, Sequence
+from typing import Iterable, List, Sequence
 
 import cryptopals.single_byte_xor
+import cryptopals.util
 
 bit_masks = [1 << offset for offset in range(8)]
 
@@ -18,18 +19,8 @@ def hamming_distance(bytes_0: bytes, bytes_1: bytes) -> int:
     return sum(sum(bits(byte_0 ^ byte_1)) for (byte_0, byte_1) in zip(bytes_0, bytes_1))
 
 
-def chunk_bytes(bytes_: bytes, chunk_length: int) -> Iterator[bytes]:
-    iteration = 0
-    while True:
-        chunk = bytes_[iteration * chunk_length : (iteration + 1) * chunk_length]
-        if len(chunk) < chunk_length:
-            break
-        yield chunk
-        iteration += 1
-
-
 def evaluate_length(ciphertext: bytes, length: int) -> float:
-    chunks = chunk_bytes(ciphertext, chunk_length=length)
+    chunks = cryptopals.util.chunk_bytes(ciphertext, chunk_length=length)
     distances: List[float] = []
     try:
         for _ in range(64):
@@ -59,7 +50,7 @@ def validate(plaintext: bytes):
 def crack(ciphertext: bytes, key_lengths: Iterable[int]) -> bytes:
     guessed_key_lengths = guess_key_length(ciphertext, lengths=key_lengths)
     for key_length in guessed_key_lengths:
-        chunks = chunk_bytes(ciphertext, chunk_length=key_length)
+        chunks = cryptopals.util.chunk_bytes(ciphertext, chunk_length=key_length)
         single_byte_keys = [
             cryptopals.single_byte_xor.crack(column) for column in transpose(chunks)
         ]
