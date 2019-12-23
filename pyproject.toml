@@ -13,7 +13,7 @@ cryptography = "*"
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
-black = {version = "*", allows-prereleases = true}
+black = {version = "*", allow-prereleases = true}
 flake8 = "*"
 isort = "*"
 mypy = "*"
@@ -21,5 +21,5 @@ pylint = "*"
 pytest = "*"
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=1.0.0"]
 build-backend = "poetry.masonry.api"
