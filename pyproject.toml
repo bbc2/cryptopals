@@ -19,6 +19,7 @@ isort = "*"
 mypy = "*"
 pylint = "*"
 pytest = "*"
+pytest-repeat = "*"
 
 [build-system]
 requires = ["poetry>=1.0.0"]

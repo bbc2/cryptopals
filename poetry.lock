@@ -330,6 +330,17 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 category = "dev"
+description = "pytest plugin for repeating tests"
+name = "pytest-repeat"
+optional = false
+python-versions = "*"
+version = "0.8.0"
+
+[package.dependencies]
+pytest = ">=3.6"
+
+[[package]]
+category = "dev"
 description = "Alternative regular expression module, to replace re."
 name = "regex"
 optional = false
@@ -401,7 +412,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "53217e458bea2a8d8cfc640714ceea77da0150d1991124863249d7290c3b262e"
+content-hash = "66ce57e45d3d9619bed5d0998b925384adaf582a0843baf82e03a95c1eabf567"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -595,6 +606,10 @@ pyparsing = [
 pytest = [
     {file = "pytest-5.3.2-py3-none-any.whl", hash = "sha256:e41d489ff43948babd0fad7ad5e49b8735d5d55e26628a58673c39ff61d95de4"},
     {file = "pytest-5.3.2.tar.gz", hash = "sha256:6b571215b5a790f9b41f19f3531c53a45cf6bb8ef2988bc1ff9afb38270b25fa"},
+]
+pytest-repeat = [
+    {file = "pytest-repeat-0.8.0.tar.gz", hash = "sha256:52bc413ab1a772e72c953a5592196ddd266fd2e76280eaac0c2a8378e9ac6dd9"},
+    {file = "pytest_repeat-0.8.0-py2.py3-none-any.whl", hash = "sha256:f506cf5b3306cc4308c4a76f6d8988a9f61c1c2609d48ad422e26a8e37ae50c4"},
 ]
 regex = [
     {file = "regex-2019.12.20-cp27-cp27m-win32.whl", hash = "sha256:7bbbdbada3078dc360d4692a9b28479f569db7fc7f304b668787afc9feb38ec8"},
