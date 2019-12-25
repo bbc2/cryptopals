@@ -9,3 +9,7 @@ def chunk_bytes(bytes_: bytes, chunk_length: int) -> Iterator[bytes]:
             break
         yield chunk
         iteration += 1
+
+
+def nth_block(text: bytes, block_length: int, number: int, count: int = 1) -> bytes:
+    return text[number * block_length : (number + count) * block_length]

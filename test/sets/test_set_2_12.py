@@ -7,7 +7,7 @@ from typing import Callable
 import cryptopals.aes
 import cryptopals.ecb
 import cryptopals.pkcs7
-import cryptopals.util
+from cryptopals.util import nth_block
 
 
 def make_encryption_oracle() -> Callable[[bytes], bytes]:
@@ -74,10 +74,6 @@ def find_lengths(oracle: Callable[[bytes], bytes]) -> Lengths:
                 unknown_string=base_length - input_length,
             )
     assert False
-
-
-def nth_block(text: bytes, block_length: int, number: int) -> bytes:
-    return text[number * block_length : (number + 1) * block_length]
 
 
 def find_byte(

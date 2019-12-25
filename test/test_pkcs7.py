@@ -16,3 +16,19 @@ def test_pad_mod(bytes_, block_length, expected):
     result = cryptopals.pkcs7.pad(bytes_=bytes_, block_length=block_length)
 
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    "padded,expected",
+    [
+        (b"\x01", b""),
+        (b"1\x01", b"1"),
+        (b"1\x02\x02", b"1"),
+        (b"", None),
+        (b"\x02", None),
+    ],
+)
+def test_unpad(padded, expected):
+    result = cryptopals.pkcs7.unpad(padded)
+
+    assert result == expected
