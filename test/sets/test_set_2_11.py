@@ -30,7 +30,10 @@ def encryption_oracle(input_: bytes) -> Result:
     else:
         ciphertext = cryptopals.aes.encrypt_cbc(key=key, plaintext=padded, iv=iv)
 
-    return Result(ciphertext=ciphertext, is_ecb=is_ecb,)
+    return Result(
+        ciphertext=ciphertext,
+        is_ecb=is_ecb,
+    )
 
 
 @pytest.mark.repeat(100)

@@ -7,7 +7,8 @@ import cryptopals.xor
 
 def test_hamming_distance():
     result = cryptopals.multi_byte_xor.hamming_distance(
-        b"this is a test", b"wokka wokka!!!",
+        b"this is a test",
+        b"wokka wokka!!!",
     )
 
     assert result == 37

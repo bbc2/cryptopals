@@ -62,7 +62,10 @@ class Decryption:
 
     @classmethod
     def from_ciphertext(cls, ciphertext: bytes, key: bytes) -> "Decryption":
-        return cls(plaintext=cryptopals.xor.encrypt(ciphertext, key), key=key,)
+        return cls(
+            plaintext=cryptopals.xor.encrypt(ciphertext, key),
+            key=key,
+        )
 
 
 def crack(ciphertext: bytes) -> bytes:

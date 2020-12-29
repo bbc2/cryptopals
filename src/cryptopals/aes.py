@@ -33,7 +33,8 @@ def encrypt_cbc(key: bytes, plaintext: bytes, iv: bytes) -> bytes:
 
     for plaintext_block in plaintext_blocks:
         ciphertext_block = encrypt_ecb(
-            key=key, plaintext=cryptopals.xor.add(plaintext_block, ciphertext_block),
+            key=key,
+            plaintext=cryptopals.xor.add(plaintext_block, ciphertext_block),
         )
         ciphertext += ciphertext_block
 
@@ -51,7 +52,11 @@ def decrypt_cbc(key: bytes, ciphertext: bytes, iv: bytes) -> bytes:
 
     for ciphertext_block in ciphertext_blocks:
         plaintext += cryptopals.xor.add(
-            decrypt_ecb(key=key, ciphertext=ciphertext_block,), previous_block,
+            decrypt_ecb(
+                key=key,
+                ciphertext=ciphertext_block,
+            ),
+            previous_block,
         )
         previous_block = ciphertext_block
 

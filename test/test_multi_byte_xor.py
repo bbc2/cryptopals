@@ -23,7 +23,8 @@ def test_guess_key_length():
     ciphertext = b"abc" * 3
 
     result = cryptopals.multi_byte_xor.guess_key_length(
-        ciphertext=ciphertext, lengths=range(1, 5),
+        ciphertext=ciphertext,
+        lengths=range(1, 5),
     )
 
     assert result[0] == 3

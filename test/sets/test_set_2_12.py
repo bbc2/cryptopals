@@ -93,7 +93,9 @@ def find_byte(
 
 
 def find_unknown_string(
-    oracle: Callable[[bytes], bytes], block_length: int, unknown_string_length: int,
+    oracle: Callable[[bytes], bytes],
+    block_length: int,
+    unknown_string_length: int,
 ):
     # Suppose the block length is 8 and the unknown string is `0123456789`.  At each step,
     # a byte from the unknown string is discovered.  Each step is denoted with the
