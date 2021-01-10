@@ -27,22 +27,6 @@ def make_encryption_oracle() -> Callable[[bytes], bytes]:
     return encryption_oracle
 
 
-def find_byte(
-    oracle: Callable[[bytes], bytes],
-    plaintext: bytes,
-    target_block: bytes,
-    block_number: int,
-    block_length: int,
-):
-    for i in range(256):
-        byte = bytes([i])
-        ciphertext = oracle(plaintext + byte)
-        block = nth_block(ciphertext, block_length=block_length, number=block_number)
-        if block == target_block:
-            return byte
-    assert False
-
-
 def find_unknown_string(
     oracle: Callable[[bytes], bytes],
     block_length: int,
@@ -82,7 +66,7 @@ def find_unknown_string(
         ciphertext = oracle(partial_plaintext)
         block_number = step // block_length
         block = nth_block(ciphertext, block_length=block_length, number=block_number)
-        unknown_string += find_byte(
+        unknown_string += cryptopals.ecb.find_byte(
             oracle=oracle,
             plaintext=partial_plaintext + unknown_string,
             target_block=block,

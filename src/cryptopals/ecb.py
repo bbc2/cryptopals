@@ -58,3 +58,37 @@ def find_lengths(oracle: Callable[[bytes], bytes]) -> Lengths:
                 extra_byte_count=base_length - input_length,
             )
     assert False
+
+
+def find_byte(
+    oracle: Callable[[bytes], bytes],
+    plaintext: bytes,
+    target_block: bytes,
+    block_number: int,
+    block_length: int,
+):
+    """
+    Brute force the last byte of a block of ciphertext.
+
+    The length of the plaintext must be 1 less than a multiple of the block length, so
+    that the added byte will be at the end of a block.
+    """
+
+    # For every possible x the following is encrypted with the oracle:
+    #
+    #     ... PPPPPPPx ... -> ... CCCCCCCC ...
+    #
+    # The algorithm stops when "CCCCCCCC" is the target block.
+
+    for i in range(256):
+        byte = bytes([i])
+        ciphertext = oracle(plaintext + byte)
+        block = cryptopals.util.nth_block(
+            ciphertext,
+            block_length=block_length,
+            number=block_number,
+        )
+        if block == target_block:
+            return byte
+
+    assert False
