@@ -6,10 +6,10 @@ check:
 	pytest
 	flake8 ${src}
 	pylint ${src}
-	isort --check --recursive ${src}
+	isort --check ${src}
 	black --check ${src}
 
 .PHONY: format
 format:
-	isort --recursive ${src}
+	isort ${src}
 	black ${src}
