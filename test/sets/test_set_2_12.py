@@ -1,7 +1,5 @@
 import base64
-import itertools
 import os
-from dataclasses import dataclass
 from typing import Callable
 
 import cryptopals.aes
@@ -27,53 +25,6 @@ def make_encryption_oracle() -> Callable[[bytes], bytes]:
         return cryptopals.aes.encrypt_ecb(key=key, plaintext=padded)
 
     return encryption_oracle
-
-
-@dataclass(frozen=True)
-class Lengths:
-    block: int
-    unknown_string: int
-
-
-def find_lengths(oracle: Callable[[bytes], bytes]) -> Lengths:
-    """
-    Find the block and unknown string lengths of the encryption oracle.
-    """
-
-    # For a 5-byte unknown string:
-    #
-    # ________ -> 01234PPP
-    # A_______ -> A01234PP
-    # AA______ -> AA01234P
-    # AAA_____ -> AAA01234 PPPPPPPP
-    #
-    # * Block length: 16 - 8.
-    # * String length: 8 - 3.
-    #
-    # For an 8-byte unknown string:
-    #
-    # ________ -> 01234567 PPPPPPPP
-    # A_______ -> A0123456 7PPPPPPP
-    # AA______ -> AA012345 67PPPPPP
-    # AAA_____ -> AAA01234 567PPPPP
-    # AAAA____ -> AAAA0123 4567PPPP
-    # AAAAA___ -> AAAAA012 34567PPP
-    # AAAAAA__ -> AAAAAA01 234567PP
-    # AAAAAAA_ -> AAAAAAA0 1234567P
-    # AAAAAAAA -> AAAAAAAA 01234567 PPPPPPPP
-    #
-    # * Block length: 24 - 16.
-    # * String length: 16 - 8.
-
-    base_length = len(oracle(b""))
-    for input_length in itertools.count(start=1):
-        ciphertext_length = len(oracle(b"A" * input_length))
-        if ciphertext_length != base_length:
-            return Lengths(
-                block=ciphertext_length - base_length,
-                unknown_string=base_length - input_length,
-            )
-    assert False
 
 
 def find_byte(
@@ -144,12 +95,12 @@ def find_unknown_string(
 
 def test():
     encryption_oracle = make_encryption_oracle()
-    lengths = find_lengths(encryption_oracle)
+    lengths = cryptopals.ecb.find_lengths(encryption_oracle)
 
-    assert lengths == Lengths(block=16, unknown_string=138)
+    assert lengths == cryptopals.ecb.Lengths(block=16, extra_byte_count=138)
 
     block_length = lengths.block
-    unknown_string_length = lengths.unknown_string
+    unknown_string_length = lengths.extra_byte_count
     ciphertext = encryption_oracle(b"A" * (2 * block_length))
 
     assert cryptopals.ecb.detect(ciphertext, block_length=block_length)
