@@ -26,6 +26,8 @@ def test_pad_mod(bytes_, block_length, expected):
         (b"1\x02\x02", b"1"),
         (b"", None),
         (b"\x02", None),
+        (b"1\x03\x02", None),
+        (b"1\x02\x03", None),
     ],
 )
 def test_unpad(padded, expected):
