@@ -1,11 +1,11 @@
 import base64
-from importlib.resources import open_binary
+from importlib.resources import files
 
 import cryptopals.ecb
 
 
 def test():
-    lines = open_binary("test.sets.data", "1_08.txt").readlines()
+    lines = files("test.sets.data").joinpath("1_08.txt").open("rb").readlines()
     ciphertexts = [base64.b64decode(line) for line in lines]
 
     detected = [

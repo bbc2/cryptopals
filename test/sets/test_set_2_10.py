@@ -1,12 +1,13 @@
 import base64
-from importlib.resources import read_binary
+from importlib.resources import files
 
 import cryptopals.aes
 import cryptopals.pkcs7
 
 
 def test():
-    ciphertext = base64.b64decode(read_binary("test.sets.data", "2_10.txt"))
+    data = files("test.sets.data").joinpath("2_10.txt").read_bytes()
+    ciphertext = base64.b64decode(data)
 
     result = cryptopals.aes.decrypt_cbc(
         key=b"YELLOW SUBMARINE",

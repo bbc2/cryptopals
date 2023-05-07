@@ -1,4 +1,4 @@
-from importlib.resources import open_binary
+from importlib.resources import files
 
 import cryptopals.format
 import cryptopals.single_byte_xor
@@ -7,7 +7,7 @@ import cryptopals.single_byte_xor
 def test():
     ciphertexts = [
         cryptopals.format.hex_to_bytes(line.strip())
-        for line in open_binary("test.sets.data", "1_04.txt").readlines()
+        for line in files("test.sets.data").joinpath("1_04.txt").open().readlines()
     ]
 
     result = cryptopals.single_byte_xor.find(ciphertexts)
