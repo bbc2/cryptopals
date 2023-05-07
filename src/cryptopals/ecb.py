@@ -21,7 +21,13 @@ class Lengths:
 
 def find_lengths(oracle: Callable[[bytes], bytes]) -> Lengths:
     """
-    Find the block and fixed number of added bytes of an ECB encryption oracle.
+    Find the block and fixed number of added bytes of an encryption oracle.
+
+    Requirements:
+
+    - The oracle uses a block cipher (e.g. AES CBC).
+    - The number of bytes added is always the same. It doesn't matter if the bytes are
+      different.
     """
 
     # For a 5-byte fixed string:

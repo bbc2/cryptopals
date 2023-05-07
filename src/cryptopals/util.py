@@ -11,5 +11,16 @@ def chunk_bytes(bytes_: bytes, chunk_length: int) -> Iterator[bytes]:
         iteration += 1
 
 
-def nth_block(text: bytes, block_length: int, number: int, count: int = 1) -> bytes:
-    return text[number * block_length : (number + count) * block_length]
+def nth_block(
+    data: bytes, block_length: int, number: int, count: int | None = 1
+) -> bytes:
+    """
+    Return the nth block in a sequence of bytes.
+
+    If `count` is `None`, this returns all the blocks starting with the one at the
+    specified number.
+    """
+    if count is None:
+        return data[number * block_length :]
+    else:
+        return data[number * block_length : (number + count) * block_length]

@@ -1,68 +1,17 @@
 import os
 from dataclasses import dataclass
-from typing import Dict, Optional, Tuple
-
-import pytest
+from typing import Dict, Optional
 
 import cryptopals.aes
 import cryptopals.pkcs7
+from cryptopals.params import Params
 from cryptopals.util import nth_block
 
-
-class ParserError(Exception):
-    pass
-
-
-def decode_binding(binding: str) -> Tuple[str, str]:
-    try:
-        (key, value) = binding.split("=")
-    except ValueError:
-        raise ParserError()
-    else:
-        return (key, value)
-
-
-def decode_cookie(cookie: str) -> Optional[Dict[str, str]]:
-    if cookie == "":
-        return {}
-    try:
-        return dict(decode_binding(binding) for binding in cookie.split("&"))
-    except ParserError:
-        return None
-
-
-@pytest.mark.parametrize(
-    "cookie,expected",
-    [
-        ("", {}),
-        ("a=b", {"a": "b"}),
-        ("a=b&c=d", {"a": "b", "c": "d"}),
-        ("a=b&a=c", {"a": "c"}),
-        ("a", None),
-        ("&", None),
-        ("a=b&c", None),
-    ],
-)
-def test_decode_cookie(cookie, expected):
-    result = decode_cookie(cookie)
-
-    assert result == expected
-
-
-def encode_binding(key: str, value: str) -> str:
-    assert "&" not in key
-    assert "=" not in key
-    assert "&" not in value
-    assert "=" not in value
-    return f"{key}={value}"
-
-
-def encode_cookie(cookie: Dict[str, str]) -> str:
-    return "&".join(encode_binding(key, value) for (key, value) in cookie.items())
+params = Params(bind_char="=", delim_char="&")
 
 
 def profile_for(email: str) -> str:
-    return encode_cookie({"email": email, "uid": "10", "role": "user"})
+    return params.encode({"email": email, "uid": "10", "role": "user"})
 
 
 @dataclass
@@ -80,7 +29,7 @@ class Oracle:
         plaintext = cryptopals.pkcs7.unpad(padded)
         if plaintext is None:
             return None
-        return decode_cookie(plaintext.decode())
+        return params.decode(plaintext.decode())
 
 
 def test():
