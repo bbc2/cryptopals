@@ -9,7 +9,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-cryptography = "^40.0.2"
+cryptography = "^41.0.3"
 python = "^3.11"
 
 [tool.poetry.dev-dependencies]
