@@ -27,6 +27,9 @@ known-first-party = ["cryptopals"]
 check_untyped_defs = true
 ignore_missing_imports = true
 
+[tool.pytest.ini_options]
+log_cli_level = "INFO"
+
 [build-system]
 requires = ["poetry>=1.0.0"]
 build-backend = "poetry.masonry.api"

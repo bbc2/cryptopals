@@ -24,3 +24,18 @@ def nth_block(
         return data[number * block_length :]
     else:
         return data[number * block_length : (number + count) * block_length]
+
+
+def nth_block_view(
+    data: bytes | bytearray, block_length: int, number: int, count: int | None = 1
+) -> memoryview:
+    """
+    Return a memory view of the nth block in a sequence of bytes.
+
+    If `count` is `None`, this returns all the blocks starting with the one at the
+    specified number.
+    """
+    if count is None:
+        return memoryview(data)[number * block_length :]
+    else:
+        return memoryview(data)[number * block_length : (number + count) * block_length]
