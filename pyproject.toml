@@ -4,22 +4,28 @@ version = "0.0.1"
 description = "Attempt to solve the Cryptopals challenges"
 authors = ["Bertrand Bonnefoy-Claudet <bertrand@bertrandbc.com>"]
 license = "MIT"
-packages = [
-    {include = "cryptopals", from = "src"},
-]
 
 [tool.poetry.dependencies]
 cryptography = "^41.0.3"
 python = "^3.11"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
-flake8 = "^6.0.0"
-isort = "^5.12.0"
 mypy = "^1.2.0"
-pylint = "^2.17.4"
 pytest = "^7.3.1"
 pytest-repeat = "^0.9.1"
+ruff = "^0.0.290"
+
+[tool.ruff]
+select = ["ASYNC", "C4", "E", "F", "N", "Q", "RUF", "W"]
+line-length = 100
+
+[tool.ruff.isort]
+known-first-party = ["cryptopals"]
+
+[tool.mypy]
+check_untyped_defs = true
+ignore_missing_imports = true
 
 [build-system]
 requires = ["poetry>=1.0.0"]

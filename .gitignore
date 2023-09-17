@@ -3,6 +3,7 @@
 *.log
 *.py[cod]
 .mypy_cache
+.dmypy.json
 .pytest_cache
 __pycache__
 dist
