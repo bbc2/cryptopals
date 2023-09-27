@@ -23,6 +23,9 @@ class Oracle:
         b"abcdefghijklmnop",
         b"abcdefghijklmnopqrstuvwxyzABCDEF",
         b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV",
+        b"abcdefghijklmn\x02\x01",
+        b"abcdefghijklmn\x02\x02",
+        b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff",
     ],
 )
 def test_crack(plaintext: bytes) -> None:

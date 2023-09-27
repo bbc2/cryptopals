@@ -94,12 +94,20 @@ def crack_byte(
 
     original_byte = block[index]  # Save the original byte before modifying it.
 
-    # Assume that the first valid padding we encounter is the right one. This is true here
-    # but not everywhere.
-    for delta in (*range(1, 256), 0):
+    # Change the target byte (with our `delta` byte) until the padding is accepted.
+    for delta in range(256):
         block[index] = original_byte ^ delta
 
         if oracle.check(iv=iv, ciphertext=ciphertext):
+            if pad == 1:
+                # Resolve a potential ambiguity by modifying the byte of the left and
+                # checking again with the oracle (e.g. we turned `0x0200` into `0x0202`,
+                # which is valid padding but not the one we want; we want `0x0201`).
+                block[index - 1] ^= 1
+
+                if not oracle.check(iv=iv, ciphertext=ciphertext):
+                    continue
+
             break
 
     # We changed the last byte ciphertext and it worked so we assume it turned the padding
