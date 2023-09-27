@@ -14,7 +14,7 @@ check-lint:  ## Lint and check typing.
 
 .PHONY: check-test
 check-test:  ## Run all the tests.
-	pytest
+	pytest --numprocesses auto
 
 .PHONY: check-format
 check-format:  ## Check formatting.
