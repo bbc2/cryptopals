@@ -1,3 +1,6 @@
+import itertools
+from typing import Iterator
+
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
@@ -61,3 +64,29 @@ def decrypt_cbc(key: bytes, ciphertext: bytes, iv: bytes) -> bytes:
         previous_block = ciphertext_block
 
     return plaintext
+
+
+def gen_ctr_blocks(key: bytes, nonce: bytes) -> Iterator[bytes]:
+    counter = 0
+    while True:
+        data = nonce + counter.to_bytes(8, "little")
+        yield encrypt_ecb(key=key, plaintext=data)
+        counter += 1
+
+
+def encrypt_ctr(key: bytes, plaintext: bytes, nonce: bytes) -> bytes:
+    assert len(key) == 16
+    assert len(nonce) == 8
+
+    block_length = 16
+    length = len(plaintext)
+    count = length // block_length
+    remainder = length % block_length
+    needed = count + 1 if remainder else count
+    ctr_blocks = itertools.islice(gen_ctr_blocks(key=key, nonce=nonce), needed)
+    ctr_stream = b"".join(ctr_blocks)
+    return cryptopals.xor.encrypt(plaintext=plaintext, key=ctr_stream)
+
+
+def decrypt_ctr(key: bytes, ciphertext: bytes, nonce: bytes) -> bytes:
+    return encrypt_ctr(key=key, plaintext=ciphertext, nonce=nonce)
