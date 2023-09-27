@@ -72,7 +72,7 @@ def find_byte(
     target_block: bytes,
     block_number: int,
     block_length: int,
-):
+) -> bytes:
     """
     Brute force the last byte of a block of ciphertext.
 

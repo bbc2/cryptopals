@@ -3,6 +3,7 @@ from typing import Iterable, List, Sequence
 
 import cryptopals.single_byte_xor
 import cryptopals.util
+import cryptopals.xor
 
 bit_masks = [1 << offset for offset in range(8)]
 
@@ -43,7 +44,7 @@ def transpose(rows: Iterable[bytes]) -> Sequence[bytes]:
     return [bytes(column) for column in zip(*rows)]
 
 
-def validate(plaintext: bytes):
+def validate(plaintext: bytes) -> bool:
     return all(byte in string.printable.encode() for byte in plaintext)
 
 

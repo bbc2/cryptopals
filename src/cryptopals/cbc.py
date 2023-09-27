@@ -131,7 +131,7 @@ def crack_block(oracle: Oracle, params: Params, block_number: int) -> bytes:
         )
     )
 
-    # First byte (from the right):
+    # First byte (from the right) -> None:
     #
     # Modify the last byte of the block (identified by `*` on the `xor` line) until
     # padding is accepted. Then we have the delta to infer the last byte of plaintext.
@@ -148,7 +148,7 @@ def crack_block(oracle: Oracle, params: Params, block_number: int) -> bytes:
     #
     # Therefore, `p = d ^ 1`.
     #
-    # Second byte (from the right):
+    # Second byte (from the right) -> None:
     #
     # Modify the last byte of the block to set it to `2` based on the plaintext discovered
     # in the last step (`d = p ^ 2`). Modify the byte on the left (identified by `*` on

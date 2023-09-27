@@ -1,7 +1,7 @@
 import cryptopals.format
 
 
-def test():
+def test() -> None:
     string_0 = "1c0111001f010100061a024b53535009181c"
     string_1 = "686974207468652062756c6c277320657965"
     input_0 = cryptopals.format.hex_to_bytes(string_0)

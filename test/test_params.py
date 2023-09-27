@@ -37,7 +37,7 @@ def test_encode_forbidden_character_in_value() -> None:
         ("a=b&c", None),
     ],
 )
-def test_decode(cookie, expected) -> None:
+def test_decode(cookie: str, expected: dict[str, str] | None) -> None:
     params = Params(bind_char="=", delim_char="&")
 
     result = params.decode(cookie)

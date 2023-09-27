@@ -25,8 +25,7 @@ line-length = 100
 known-first-party = ["cryptopals"]
 
 [tool.mypy]
-check_untyped_defs = true
-ignore_missing_imports = true
+strict = true
 
 [tool.pytest.ini_options]
 log_cli_level = "INFO"

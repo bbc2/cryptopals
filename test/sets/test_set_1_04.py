@@ -4,7 +4,7 @@ import cryptopals.format
 import cryptopals.single_byte_xor
 
 
-def test():
+def test() -> None:
     ciphertexts = [
         cryptopals.format.hex_to_bytes(line.strip())
         for line in files("test.sets.data").joinpath("1_04.txt").open().readlines()

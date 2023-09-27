@@ -31,7 +31,7 @@ def find_unknown_string(
     oracle: Callable[[bytes], bytes],
     block_length: int,
     unknown_string_length: int,
-):
+) -> bytes:
     # Suppose the block length is 8 and the unknown string is `0123456789`.  At each step,
     # a byte from the unknown string is discovered.  Each step is denoted with the
     # following format:
@@ -77,7 +77,7 @@ def find_unknown_string(
     return unknown_string
 
 
-def test():
+def test() -> None:
     encryption_oracle = make_encryption_oracle()
     lengths = cryptopals.ecb.find_lengths(encryption_oracle)
 

@@ -4,7 +4,7 @@ from importlib.resources import files
 import cryptopals.ecb
 
 
-def test():
+def test() -> None:
     lines = files("test.sets.data").joinpath("1_08.txt").open("rb").readlines()
     ciphertexts = [base64.b64decode(line) for line in lines]
 

@@ -13,13 +13,13 @@ import cryptopals.multi_byte_xor
         (0xFF, [True, True, True, True, True, True, True, True]),
     ],
 )
-def test_bits(input_: int, expected: Sequence[bool]):
+def test_bits(input_: int, expected: Sequence[bool]) -> None:
     result = cryptopals.multi_byte_xor.bits(input_)
 
     assert result == expected
 
 
-def test_guess_key_length():
+def test_guess_key_length() -> None:
     ciphertext = b"abc" * 3
 
     result = cryptopals.multi_byte_xor.guess_key_length(
@@ -39,7 +39,7 @@ def test_guess_key_length():
         ([b"ab", b"cd"], [b"ac", b"bd"]),
     ],
 )
-def test_transpose(input_: Sequence[bytes], expected: Sequence[bytes]):
+def test_transpose(input_: Sequence[bytes], expected: Sequence[bytes]) -> None:
     result = cryptopals.multi_byte_xor.transpose(input_)
 
     assert list(result) == expected

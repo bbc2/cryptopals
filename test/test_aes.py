@@ -24,7 +24,7 @@ import cryptopals.format
         ),
     ],
 )
-def test_encrypt_ecb(plaintext: str, key: str, expected: str):
+def test_encrypt_ecb(plaintext: str, key: str, expected: str) -> None:
     result = cryptopals.aes.encrypt_ecb(
         key=cryptopals.format.hex_to_bytes(key),
         plaintext=cryptopals.format.hex_to_bytes(plaintext),
@@ -53,7 +53,7 @@ def test_encrypt_ecb(plaintext: str, key: str, expected: str):
         ),
     ],
 )
-def test_decrypt_ecb(ciphertext: str, key: str, expected: str):
+def test_decrypt_ecb(ciphertext: str, key: str, expected: str) -> None:
     result = cryptopals.aes.decrypt_ecb(
         key=cryptopals.format.hex_to_bytes(key),
         ciphertext=cryptopals.format.hex_to_bytes(ciphertext),

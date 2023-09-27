@@ -32,7 +32,7 @@ class Oracle:
         return params.decode(plaintext.decode())
 
 
-def test():
+def test() -> None:
     # Two emails are used to get two ciphertexts:
     #
     # Ciphertext 0:

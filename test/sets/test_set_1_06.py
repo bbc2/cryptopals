@@ -5,7 +5,7 @@ import cryptopals.multi_byte_xor
 import cryptopals.xor
 
 
-def test_hamming_distance():
+def test_hamming_distance() -> None:
     result = cryptopals.multi_byte_xor.hamming_distance(
         b"this is a test",
         b"wokka wokka!!!",
@@ -14,7 +14,7 @@ def test_hamming_distance():
     assert result == 37
 
 
-def test_crack():
+def test_crack() -> None:
     data = files("test.sets.data").joinpath("1_06.txt").read_bytes()
     ciphertext = base64.b64decode(data)
 

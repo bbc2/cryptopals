@@ -37,7 +37,7 @@ def encryption_oracle(input_: bytes) -> Result:
 
 
 @pytest.mark.repeat(100)
-def test():
+def test() -> None:
     # ECB can be detected because if two input blocks are identical, the two output blocks
     # will also be identical.  Therefore, we need two input blocks to be the same in the
     # input and we'll look for identical blocks in the output.

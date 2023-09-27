@@ -5,7 +5,7 @@ import cryptopals.util
 import cryptopals.xor
 
 
-def ecb_cipher(key: bytes) -> Cipher:
+def ecb_cipher(key: bytes) -> Cipher[modes.ECB]:
     backend = default_backend()
     return Cipher(algorithms.AES(key), modes.ECB(), backend=backend)
 

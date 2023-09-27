@@ -11,7 +11,7 @@ import cryptopals.pkcs7
         (b"ICE ICE BABY\x01\x02\x03\x04", None),
     ],
 )
-def test_unpad(padded, expected):
+def test_unpad(padded: bytes, expected: bytes | None) -> None:
     result = cryptopals.pkcs7.unpad(padded)
 
     assert result == expected

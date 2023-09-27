@@ -33,7 +33,7 @@ def make_encryption_oracle() -> Callable[[bytes], bytes]:
     return encryption_oracle
 
 
-def find_repeated_block(text: bytes, block_length: int):
+def find_repeated_block(text: bytes, block_length: int) -> bytes:
     previous_chunk = None
 
     for chunk in chunk_bytes(text, block_length):
@@ -100,7 +100,7 @@ def find_unknown_string(
     block_length: int,
     prefix_length: int,
     unknown_string_length: int,
-):
+) -> bytes:
     # This is almost the same algorithm as in challenge 12.  The difference is that we add
     # some padding (with "Z" bytes) to the original padding (with "A" bytes) so that each
     # byte we brute force remains at the end of a block, and that the whole ciphertext is
@@ -135,7 +135,7 @@ def find_unknown_string(
     return unknown_string
 
 
-def test():
+def test() -> None:
     encryption_oracle = make_encryption_oracle()
     lengths = cryptopals.ecb.find_lengths(encryption_oracle)
 

@@ -4,7 +4,7 @@ from importlib.resources import files
 import cryptopals.aes
 
 
-def test():
+def test() -> None:
     data = files("test.sets.data").joinpath("1_07.txt").read_bytes()
     ciphertext = base64.b64decode(data)
 
