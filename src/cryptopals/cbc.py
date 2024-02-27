@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class Oracle(Protocol):
-    def check(self, iv: bytes, ciphertext: bytes) -> bool:
-        ...
+    def check(self, iv: bytes, ciphertext: bytes) -> bool: ...
 
 
 @dataclass(frozen=True)
