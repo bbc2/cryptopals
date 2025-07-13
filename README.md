@@ -5,7 +5,7 @@ Challenges: [https://cryptopals.com](https://cryptopals.com)
 ## How to check the code
 
 ```bash
-poetry install
+uv sync
 make check
 ```
 

@@ -1,21 +1,21 @@
-[tool.poetry]
+[project]
 name = "cryptopals"
 version = "0.0.1"
 description = "Attempt to solve the Cryptopals challenges"
-authors = ["Bertrand Bonnefoy-Claudet <bertrand@bertrandbc.com>"]
-license = "MIT"
-
-[tool.poetry.dependencies]
-cryptography = "^45.0.5"
-python = "^3.11"
-
-[tool.poetry.group.dev.dependencies]
-black = "^25.1.0"
-mypy = "^1.2.0"
-pytest = "^8.0.2"
-pytest-repeat = "^0.9.1"
-pytest-xdist = "^3.3.1"
-ruff = "^0.12.3"
+authors = [
+    { name = "Bertrand Bonnefoy-Claudet", email = "bertrand@bertrandbc.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "black>=25.1.0",
+    "cryptography>=45.0.5",
+    "mypy>=1.2.0",
+    "pytest>=8.0.2",
+    "pytest-repeat>=0.9.1",
+    "pytest-xdist>=3.3.1",
+    "ruff>=0.12.3",
+]
 
 [tool.ruff]
 lint.select = ["ASYNC", "C4", "E", "F", "N", "Q", "RUF", "W"]
@@ -31,5 +31,5 @@ strict = true
 log_cli_level = "INFO"
 
 [build-system]
-requires = ["poetry>=1.0.0"]
-build-backend = "poetry.masonry.api"
+requires = ["uv_build>=0.7.20,<0.8.0"]
+build-backend = "uv_build"
