@@ -3,10 +3,7 @@ import cryptopals.format
 
 class TestEncrypt:
     def test_vector(self) -> None:
-        plaintext = (
-            b"Burning 'em, if you ain't quick and nimble\n"
-            b"I go crazy when I hear a cymbal"
-        )
+        plaintext = b"Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
 
         result = cryptopals.xor.encrypt(plaintext, b"ICE")
 

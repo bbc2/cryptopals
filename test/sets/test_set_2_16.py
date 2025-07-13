@@ -48,9 +48,7 @@ class Oracle:
 
         return Encoded(
             iv=iv,
-            ciphertext=cryptopals.aes.encrypt_cbc(
-                key=self.key, plaintext=padded, iv=iv
-            ),
+            ciphertext=cryptopals.aes.encrypt_cbc(key=self.key, plaintext=padded, iv=iv),
         )
 
     def validate(self, iv: bytes, ciphertext: bytes) -> bool:
@@ -127,9 +125,7 @@ def test() -> None:
         block[6] ^= 4  # In the decrypted plaintext: `9` → `=`.
 
         start = nth_block(cookie, block_length=block_length, number=0, count=number)
-        end = nth_block(
-            cookie, block_length=block_length, number=number + 1, count=None
-        )
+        end = nth_block(cookie, block_length=block_length, number=number + 1, count=None)
         new_cookie = start + block + end
         result = oracle.validate(iv=encryption.iv, ciphertext=new_cookie)
 

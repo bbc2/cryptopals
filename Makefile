@@ -19,12 +19,12 @@ check-test:  ## Run all the tests.
 .PHONY: check-format
 check-format:  ## Check formatting.
 	ruff check --select I --diff ${src}
-	black --check ${src}
+	ruff format --check ${src}
 
 .PHONY: check  ## Check everything.
 check: check-lint check-test check-format
 
 .PHONY: format
 format:  ## Format the source code.
-	ruff --select I --fix ${src}
-	black ${src}
+	ruff check --select I --fix ${src}
+	ruff format ${src}

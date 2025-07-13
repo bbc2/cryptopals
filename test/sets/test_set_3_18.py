@@ -5,9 +5,7 @@ import cryptopals.format
 
 
 def test_main() -> None:
-    ciphertext_base64 = (
-        b"L77na/nrFsKvynd6HzOoG7GHTLXsTVu9qvY/2syLXzhPweyyMTJULu/6/kXX0KSvoOLSFQ=="
-    )
+    ciphertext_base64 = b"L77na/nrFsKvynd6HzOoG7GHTLXsTVu9qvY/2syLXzhPweyyMTJULu/6/kXX0KSvoOLSFQ=="
     ciphertext = base64.b64decode(ciphertext_base64)
 
     plaintext = cryptopals.aes.decrypt_ctr(

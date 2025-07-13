@@ -9,6 +9,4 @@ def test() -> None:
 
     result = cryptopals.xor.encrypt(input_0, input_1)
 
-    assert (
-        cryptopals.format.bytes_to_hex(result) == "746865206b696420646f6e277420706c6179"
-    )
+    assert cryptopals.format.bytes_to_hex(result) == "746865206b696420646f6e277420706c6179"

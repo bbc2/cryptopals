@@ -77,9 +77,7 @@ def crack(ciphertext: bytes) -> bytes:
         )
         for integer in range(0, 255)
     )
-    best_candidate = min(
-        possible_plaintexts, key=lambda candidate: distance(candidate.plaintext)
-    )
+    best_candidate = min(possible_plaintexts, key=lambda candidate: distance(candidate.plaintext))
     return best_candidate.key
 
 
@@ -89,7 +87,5 @@ def find(ciphertexts: Sequence[bytes]) -> bytes:
         Decryption.from_ciphertext(ciphertext=ciphertext, key=crack(ciphertext))
         for ciphertext in ciphertexts
     )
-    best_candidate = min(
-        decryptions, key=lambda candidate: distance(candidate.plaintext)
-    )
+    best_candidate = min(decryptions, key=lambda candidate: distance(candidate.plaintext))
     return best_candidate.plaintext

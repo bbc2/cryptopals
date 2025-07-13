@@ -35,9 +35,7 @@ def evaluate_length(ciphertext: bytes, length: int) -> float:
 
 def guess_key_length(ciphertext: bytes, lengths: Iterable[int]) -> Sequence[int]:
     """Return a likely key length assuming XOR encryption."""
-    return sorted(
-        lengths, key=lambda length: evaluate_length(ciphertext, length=length)
-    )
+    return sorted(lengths, key=lambda length: evaluate_length(ciphertext, length=length))
 
 
 def transpose(rows: Iterable[bytes]) -> Sequence[bytes]:

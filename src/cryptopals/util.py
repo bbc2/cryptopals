@@ -1,19 +1,27 @@
 from typing import Iterator
 
 
-def chunk_bytes(bytes_: bytes, chunk_length: int) -> Iterator[bytes]:
+def chunk_bytes(bytes_: bytes | bytearray, chunk_length: int) -> Iterator[bytes]:
+    """
+    Split input bytes into chunks (copies).
+    """
     iteration = 0
+
     while True:
         chunk = bytes_[iteration * chunk_length : (iteration + 1) * chunk_length]
+
         if len(chunk) < chunk_length:
             break
-        yield chunk
+
+        if isinstance(chunk, bytes):
+            yield chunk
+        else:
+            yield bytes(chunk)
+
         iteration += 1
 
 
-def nth_block(
-    data: bytes, block_length: int, number: int, count: int | None = 1
-) -> bytes:
+def nth_block(data: bytes, block_length: int, number: int, count: int | None = 1) -> bytes:
     """
     Return the nth block in a sequence of bytes.
 

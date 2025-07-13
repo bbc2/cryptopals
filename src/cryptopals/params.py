@@ -38,9 +38,6 @@ class Params:
         if cookie == "":
             return {}
         try:
-            return dict(
-                self._decode_binding(binding)
-                for binding in cookie.split(self.delim_char)
-            )
+            return dict(self._decode_binding(binding) for binding in cookie.split(self.delim_char))
         except ParserError:
             return None

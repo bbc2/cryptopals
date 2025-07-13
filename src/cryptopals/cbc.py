@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class Oracle(Protocol):
-    def check(self, iv: bytes, ciphertext: bytes) -> bool: ...
+    def check(self, iv: bytes | bytearray, ciphertext: bytes | bytearray) -> bool: ...
 
 
 @dataclass(frozen=True)
@@ -74,9 +74,7 @@ def crack_byte(
     if block_number < 1:
         block = memoryview(iv)
     else:
-        block = nth_block_view(
-            data=ciphertext, block_length=params.block_length, number=-2
-        )
+        block = nth_block_view(data=ciphertext, block_length=params.block_length, number=-2)
 
     # Byte number of the target plaintext (starting from 0, from the right).
     byte_number = len(cracked.plaintext)

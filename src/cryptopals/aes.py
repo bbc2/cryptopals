@@ -44,7 +44,7 @@ def encrypt_cbc(key: bytes, plaintext: bytes, iv: bytes) -> bytes:
     return ciphertext
 
 
-def decrypt_cbc(key: bytes, ciphertext: bytes, iv: bytes) -> bytes:
+def decrypt_cbc(key: bytes, ciphertext: bytes | bytearray, iv: bytes | bytearray) -> bytes:
     block_size = 16
     assert len(ciphertext) % block_size == 0
     assert len(iv) % block_size == 0

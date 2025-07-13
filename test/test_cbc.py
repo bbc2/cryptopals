@@ -11,7 +11,7 @@ import cryptopals.pkcs7
 class Oracle:
     key: bytes
 
-    def check(self, iv: bytes, ciphertext: bytes) -> bool:
+    def check(self, iv: bytes | bytearray, ciphertext: bytes | bytearray) -> bool:
         padded = cryptopals.aes.decrypt_cbc(key=self.key, iv=iv, ciphertext=ciphertext)
         plaintext = cryptopals.pkcs7.unpad(padded)
         return plaintext is not None

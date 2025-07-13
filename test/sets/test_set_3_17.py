@@ -45,12 +45,10 @@ class Oracle:
         iv = os.urandom(16)
         return Encrypted(
             iv=iv,
-            ciphertext=cryptopals.aes.encrypt_cbc(
-                key=self.key, plaintext=padded, iv=iv
-            ),
+            ciphertext=cryptopals.aes.encrypt_cbc(key=self.key, plaintext=padded, iv=iv),
         )
 
-    def check(self, iv: bytes, ciphertext: bytes) -> bool:
+    def check(self, iv: bytes | bytearray, ciphertext: bytes | bytearray) -> bool:
         padded = cryptopals.aes.decrypt_cbc(key=self.key, iv=iv, ciphertext=ciphertext)
         plaintext = cryptopals.pkcs7.unpad(padded)
         return plaintext is not None
